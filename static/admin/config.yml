@@ -1,0 +1,78 @@
+publish_mode: editorial_workflow
+backend:
+  name: github
+  repo: chrismade/site002
+  base_url: https://rqawxtha1j.execute-api.eu-west-1.amazonaws.com
+  auth_endpoint: /prod/auth
+site_id: kuris2.acmattheis.de
+media_library:
+ name: uploadcare
+ config:
+   publicKey: 0c806145926097c31e21
+collections:
+  - name: "basics" # Used in routes, e.g., /admin/collections/blog
+    label: "Website" # Used in the UI
+    folder: "content/basics"
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields for each document, usually in front matter
+      - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Featured image", name: "thumbnail", widget: "image"}
+      - {label: "Categories", name: "categories", widget: "list", default: ["news"]}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - label: "Blog Tramway"
+    name: "tramway_posts"
+    create: true # Allow users to create new documents in this collection
+    folder: "content/tramway"
+    filter: {field: "language", value: "en"}
+    fields:
+      - {label: "Language", name: "language", widget: "select", options: ["en", "fr"]}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Content", name: "body", widget: "markdown"}
+  - label: "Blog in English"
+    name: "english_posts"
+    create: true # Allow users to create new documents in this collection
+    folder: "content/blog"
+    filter: {field: "language", value: "en"}
+    fields:
+      - {label: "Language", name: "language", widget: "select", options: ["en", "es"]}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Content", name: "body", widget: "markdown"}
+  - label: "Blog en Español"
+    name: "spanish_posts"
+    create: true # Allow users to create new documents in this collection
+    folder: "content/blog"
+    filter: {field: "language", value: "es"}
+    fields:
+      - {label: "Lenguaje", name: "language", widget: "select", options: ["en", "es"]}
+      - {label: "Titulo", name: "title", widget: "string"}
+      - {label: "Contenido", name: "body", widget: "markdown"}
+  - label: "Pages"
+    name: "pages"
+    files:
+      - label: "About Page"
+        name: "about"
+        file: "site/content/about.yml"
+        fields:
+          - {label: Title, name: title, widget: string}
+          - {label: Intro, name: intro, widget: markdown}
+          - label: Team
+            name: team
+            widget: list
+            fields:
+              - {label: Name, name: name, widget: string}
+              - {label: Position, name: position, widget: string}
+              - {label: Photo, name: photo, widget: image}
+      - label: "Locations Page"
+        name: "locations"
+        file: "site/content/locations.yml"
+        fields:
+          - {label: Title, name: title, widget: string}
+          - {label: Intro, name: intro, widget: markdown}
+          - label: Locations
+            name: locations
+            widget: list
+            fields:
+              - {label: Name, name: name, widget: string}
+              - {label: Address, name: address, widget: string}
