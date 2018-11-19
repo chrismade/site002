@@ -10,9 +10,14 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
+
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
+    echo can I just add more lines here ?
+    date -I
+    uname -a
+    pwd
+    find .
+    mount
   displayName: 'Run a multi-line script'
-  find .
-  
