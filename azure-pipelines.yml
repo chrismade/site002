@@ -7,6 +7,21 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 steps:
+- task: CopyFilesOverSSH@0
+  displayName: 'Securely copy files to the remote machine'
+  inputs:
+    sshEndpoint: 'SSH chris@blog.acmattheis.de'
+
+    sourceFolder: '$(build.artifactstagingdirectory)'
+
+    targetFolder: stagevsts
+
+
+- task: DownloadSecureFile@1
+  displayName: 'Download secure file'
+  inputs:
+    secureFile: '235a203c-7c46-45fc-a211-ca4a0ef8817f'
+
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
