@@ -24,29 +24,27 @@ steps:
     pwd
     find .
     echo ===============
+    cd $BUILD_BINARYDIRECTORY
+    curl -v -k -L -O https://github.com/gohugoio/hugo/releases/download/v0.51/hugo_0.51_Linux-64bit.deb
+    sudo dpkg -i hugo_0.51_Linux-64bit.deb
+    ls -ali
+
     cd $BUILD_STAGINGDIRECTORY
     cp /etc/passwd .
     ls -ali
-  displayName: 'Run a multi-line script'
+    displayName: 'Run a multi-line script'
 
 # Copy Files Over SSH
 # Copy files or build artifacts to a remote machine over SSH
-- task: CopyFilesOverSSH@0
+- task: DownloadSecureFile@1
   inputs:
-    sshEndpoint: 'SSH chris@blog.acmattheis.de'
-    sourceFolder: $(Build.ArtifactStagingDirectory) # Optional
-    #contents: '**' 
-    targetFolder: /var/www/kuris4 # Optional
-    cleanTargetFolder: false # Optional
-    overwrite: true # Optional
-    #failOnEmptySource: false # Optional
-    #flattenFolders: false # Optional
+    secureFile: 'key_cubox_chris'
 
 - bash: |
    # Write your commands here
    
    # Use the environment variables input below to pass secret variables to this script
    pwd
-   echo chmod 600 $DOWNLOADSECUREFILE_SECUREFILEPATH 
-   echo ssh -o StrictHostKeyChecking=no -i $DOWNLOADSECUREFILE_SECUREFILEPATH  -l chris blog.acmattheis.de uname -a
-  displayName: 'Bash Script'
+   chmod 600 $DOWNLOADSECUREFILE_SECUREFILEPATH 
+   ssh -o StrictHostKeyChecking=no -i $DOWNLOADSECUREFILE_SECUREFILEPATH  -l chris blog.acmattheis.de uname -a
+  displayName: 'Data Deploy'
