@@ -49,4 +49,6 @@ steps:
    pwd
    chmod 600 $DOWNLOADSECUREFILE_SECUREFILEPATH 
    ssh -o StrictHostKeyChecking=no -i $DOWNLOADSECUREFILE_SECUREFILEPATH  -l chris blog.acmattheis.de uname -a
+   cd $BUILD_STAGINGDIRECTORY
+   scp -r -C  -i $DOWNLOADSECUREFILE_SECUREFILEPATH * chris@blog.acmattheis.de:/var/www/kuris4
   displayName: 'Data Deploy'
