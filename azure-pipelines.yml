@@ -34,7 +34,7 @@ steps:
     cd $BUILD_STAGINGDIRECTORY
     cp /etc/passwd .
     ls -ali
-  displayName: 'get and compile site'
+  displayName: 'Get and compile site'
 
 # Copy Files Over SSH
 # Copy files or build artifacts to a remote machine over SSH
@@ -50,5 +50,5 @@ steps:
    chmod 600 $DOWNLOADSECUREFILE_SECUREFILEPATH 
    ssh -o StrictHostKeyChecking=no -i $DOWNLOADSECUREFILE_SECUREFILEPATH  -l chris blog.acmattheis.de uname -a
    cd $BUILD_STAGINGDIRECTORY
-   scp -r -C  -i $DOWNLOADSECUREFILE_SECUREFILEPATH * chris@blog.acmattheis.de:/var/www/kuris4
+   scp -v -o ConnectTimeout=90 -r -C  -i $DOWNLOADSECUREFILE_SECUREFILEPATH * chris@blog.acmattheis.de:/var/www/kuris4
   displayName: 'Data Deploy'
