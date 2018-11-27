@@ -29,12 +29,12 @@ steps:
     sudo dpkg -i hugo_0.51_Linux-64bit.deb
     type hugo
     ls -ali
-    cd $BUILD_SOURCEDIRECTORY
+    cd $BUILD_SOURCESDIRECTORY
     hugo -d $BUILD_STAGINGDIRECTORY
     cd $BUILD_STAGINGDIRECTORY
     cp /etc/passwd .
     ls -ali
-  displayName: 'Run a multi-line script'
+  displayName: 'get and compile site'
 
 # Copy Files Over SSH
 # Copy files or build artifacts to a remote machine over SSH
