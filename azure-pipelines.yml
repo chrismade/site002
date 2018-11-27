@@ -16,7 +16,8 @@ steps:
     set -x
     pwd
     uname -a
-    git submodule foreach -q --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; [ -z "$branch" ] && git checkout master || git checkout $branch'
+    # git submodule foreach -q --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; [ -z "$branch" ] && git checkout master || git checkout $branch'
+    git submodule update --init --recursive
     echo hugo # This commands builds your website on travis
     find .
   displayName: 'Run a multi-line script'
