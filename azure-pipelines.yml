@@ -23,6 +23,10 @@ steps:
     cd ..
     pwd
     find .
+    echo ===============
+    cd $BUILD_STAGINGDIRECTORY
+    cp /etc/passwd .
+    ls -ali
   displayName: 'Run a multi-line script'
 
 # Copy Files Over SSH
@@ -30,7 +34,7 @@ steps:
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'SSH chris@blog.acmattheis.de'
-    #sourceFolder: # Optional
+    sourceFolder: $BUILD_STAGINGDIRECTORY # Optional
     #contents: '**' 
     targetFolder: /var/www/kuris4 # Optional
     cleanTargetFolder: false # Optional
