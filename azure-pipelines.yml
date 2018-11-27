@@ -13,6 +13,10 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
+    set -x
+    pwd
+    uname -a
+    find .
   displayName: 'Run a multi-line script'
 
 # Copy Files Over SSH
