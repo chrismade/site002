@@ -14,11 +14,14 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
     set -x
+    set
     pwd
     uname -a
     # git submodule foreach -q --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; [ -z "$branch" ] && git checkout master || git checkout $branch'
     git submodule update --init --recursive
     echo hugo # This commands builds your website on travis
+    cd ..
+    pwd
     find .
   displayName: 'Run a multi-line script'
 
