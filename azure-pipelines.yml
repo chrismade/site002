@@ -17,13 +17,9 @@ steps:
     set
     pwd
     uname -a
-    # git submodule foreach -q --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; [ -z "$branch" ] && git checkout master || git checkout $branch'
+    echo ===============
     git submodule update --init --recursive
     echo hugo # This commands builds your website on travis
-    cd ..
-    pwd
-    find .
-    echo ===============
     cd $BUILD_BINARYDIRECTORY
     curl -v -k -L -O https://github.com/gohugoio/hugo/releases/download/v0.51/hugo_0.51_Linux-64bit.deb
     sudo dpkg -i hugo_0.51_Linux-64bit.deb
@@ -32,7 +28,6 @@ steps:
     cd $BUILD_SOURCESDIRECTORY
     hugo -d $BUILD_STAGINGDIRECTORY
     cd $BUILD_STAGINGDIRECTORY
-    cp /etc/passwd .
     ls -ali
   displayName: 'Get and compile site'
 
@@ -46,9 +41,10 @@ steps:
    # Write your commands here
    
    # Use the environment variables input below to pass secret variables to this script
+   cd $BUILD_STAGINGDIRECTORY
    pwd
    chmod 600 $DOWNLOADSECUREFILE_SECUREFILEPATH 
    ssh -o StrictHostKeyChecking=no -i $DOWNLOADSECUREFILE_SECUREFILEPATH  -l chris blog.acmattheis.de uname -a
-   cd $BUILD_STAGINGDIRECTORY
-   scp -v -o ConnectTimeout=90 -r -C  -i $DOWNLOADSECUREFILE_SECUREFILEPATH * chris@blog.acmattheis.de:/var/www/kuris4
+   # scp -v -o ConnectTimeout=90 -r -C  -i $DOWNLOADSECUREFILE_SECUREFILEPATH * chris@blog.acmattheis.de:/var/www/kuris2 # verbose is slow
+   scp -o ConnectTimeout=90 -r -C  -i $DOWNLOADSECUREFILE_SECUREFILEPATH * chris@blog.acmattheis.de:/var/www/kuris2
   displayName: 'Data Deploy'
