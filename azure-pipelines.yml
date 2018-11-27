@@ -17,6 +17,8 @@ steps:
     pwd
     uname -a
     find .
+    git submodule foreach -q --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; [ -z "$branch" ] && git checkout master || git checkout $branch'
+    echo hugo # This commands builds your website on travis
   displayName: 'Run a multi-line script'
 
 # Copy Files Over SSH
