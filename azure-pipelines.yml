@@ -34,7 +34,7 @@ steps:
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'SSH chris@blog.acmattheis.de'
-    sourceFolder: $BUILD_STAGINGDIRECTORY # Optional
+    sourceFolder: $(Build.ArtifactStagingDirectory) # Optional
     #contents: '**' 
     targetFolder: /var/www/kuris4 # Optional
     cleanTargetFolder: false # Optional
